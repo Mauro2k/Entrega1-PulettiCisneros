@@ -1,0 +1,7 @@
+from django.urls import path
+from .views import mi_vista
+
+
+urlpatterns = [
+    path('mi-vista/', mi_vista)
+]
