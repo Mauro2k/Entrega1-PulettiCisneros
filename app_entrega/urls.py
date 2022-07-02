@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import mi_vista
+from .views import index, mi_template
 
 
 urlpatterns = [
-    path('', mi_vista)
+    path('', index),
+    path('mi-template/', mi_template)
 ]
