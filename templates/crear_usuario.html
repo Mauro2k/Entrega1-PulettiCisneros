@@ -1,22 +1,23 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Creacion de usuarios</title>
+<title>Creacion de</title>
 {% endblock title %}
 
 {% block bienvenida %}
 <h1>Registro de usuario</h1>
 <h2>
-    <form action="" method="get">
-        <ul>
-            <form action={% url 'crear_usuario' %}  method="post"></form>
-                {% csrf_token %}
-                <table>
-                    {{form.as_table}}
-                </table>
-                <p><input type="submit" value="Ingresar"></p>                      
-        </ul>
-    </form>
+  
+    <ul>
+        <form action={% url 'crear_usuario' %}  method="post">
+            {% csrf_token %}
+            <table>
+                {{form.as_table}}
+            </table>
+            <p><input type="submit" value="Ingresar"></p>    
+        </form>                  
+    </ul>
+            
 </h2> 
 {% endblock bienvenida %}
 

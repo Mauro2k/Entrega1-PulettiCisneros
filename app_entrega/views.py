@@ -14,7 +14,7 @@ def index(request):
 
 
 def crear_usuario(request):
-    
+    print(request.method)
     if request.method == 'POST':
         form = FormFormularios(request.POST)
         if form.is_valid():
