@@ -1,6 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
+from datetime import datetime
+
+from .forms import FormFormularios
+from .models import Formularios
 
 
 # Create your views here.
@@ -9,10 +13,30 @@ def index(request):
     return render(request, 'index.html')
 
 
-def mi_template(request):
-    template = loader.get_template('vista_temp.html')
+def crear_usuario(request):
     
-    nombre = 'Matias'
+    if request.method == 'POST':
+        form = FormFormularios(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            fecha = data.get('fecha')
+            formulario = Formularios(nombre=data.get('nombre'),
+                                     edad=data.get('edad'),
+                                     fecha=fecha if fecha else datetime.now()
+                                     )
+            formulario.save()
+            
+            listado_usuarios = Formularios.objects.all()
+            return render(request, 'listado_usuarios.html', {'listado_usuarios': listado_usuarios})        
+        else:
+            return render(request, 'crear_usuario.html', {'form':form})    
+            
     
-    render = template.render({'nombre':nombre})
-    return HttpResponse(render)
+    formularios = FormFormularios()
+    
+    return render(request, 'crear_usuario.html', {'form':formularios})
+
+
+def listado_usuarios(request):
+    listado_usuarios = Formularios.objects.all()
+    return render(request, 'listado_usuarios.html', {'listado_usuarios': listado_usuarios})

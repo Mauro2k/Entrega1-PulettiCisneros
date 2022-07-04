@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Listado</title>
+{% endblock title %}
+
+{% block bienvenida %}
+<h1>Listado de usuarios</h1>
+<p>
+    <ul>
+    {% for usuario in listado_usuarios  %}
+    <li>{{usuario}}</li>
+    {% endfor %}
+    </ul>
+</p>
+    {% comment %} <a href={% url 'crear_usuario' %}>Crear usuario!</a> {% endcomment %}
+    <a class="btn btn-primary" href={% url 'crear_usuario' %}>Crear usuario</a>
+
+{% endblock bienvenida %}
+
+
+{% block entre_header_footer %}
+{% endblock entre_header_footer %}
+

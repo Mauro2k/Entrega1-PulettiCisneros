@@ -4,6 +4,7 @@ from django.db import models
 
 
 class Formularios(models.Model):
-    #Formulario busqueda
-    #Formulario creacion
-    ...
+    nombre = models.CharField(max_length=50)
+    edad = models.IntegerField()
+    fecha = models.DateField(null=True)
+    
