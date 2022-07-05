@@ -19,6 +19,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
+
+# Entendemos que como buena práctica de seguridad, las secret no se dejan en los repos, pero como es un TP henos aquí.
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-v=f25htl934$&cri9p=kfex&0471j_m(!_5fd%jw!ejuv*v!yk'
 
