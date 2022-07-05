@@ -7,7 +7,6 @@
 {% block bienvenida %}
 <h1>Registro de usuario</h1>
 <h2>
-  
     <ul>
         <form action={% url 'crear_usuario' %}  method="post">
             {% csrf_token %}
@@ -16,9 +15,9 @@
             </table>
             <p><input type="submit" value="Ingresar"></p>    
         </form>                  
-    </ul>
-            
+    </ul>            
 </h2> 
+
 {% endblock bienvenida %}
 
 

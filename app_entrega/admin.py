@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from app_entrega.models import Formularios
+from app_entrega.models import Usuario
 
 # Register your models here.
 
-admin.site.register(Formularios)
+admin.site.register(Usuario)

@@ -1,10 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.template import loader
 from datetime import datetime
 
-from .forms import FormFormularios
-from .models import Formularios
+from .forms import BusquedaUsuario, FormUsuario
+from .models import Usuario
 
 
 # Create your views here.
@@ -12,31 +12,40 @@ from .models import Formularios
 def index(request):
     return render(request, 'index.html')
 
+def resenia(request):
+    return render(request, 'resenia.html')
+
 
 def crear_usuario(request):
     print(request.method)
     if request.method == 'POST':
-        form = FormFormularios(request.POST)
+        form = FormUsuario(request.POST)
         if form.is_valid():
             data = form.cleaned_data
             fecha = data.get('fecha')
-            formulario = Formularios(nombre=data.get('nombre'),
+            formulario = Usuario(nombre=data.get('nombre'),
                                      edad=data.get('edad'),
                                      fecha=fecha if fecha else datetime.now()
                                      )
             formulario.save()
             
-            listado_usuarios = Formularios.objects.all()
-            return render(request, 'listado_usuarios.html', {'listado_usuarios': listado_usuarios})        
+            return redirect('listado_usuarios')     
+           
         else:
             return render(request, 'crear_usuario.html', {'form':form})    
             
     
-    formularios = FormFormularios()
+    formularios = FormUsuario()
     
     return render(request, 'crear_usuario.html', {'form':formularios})
 
 
 def listado_usuarios(request):
-    listado_usuarios = Formularios.objects.all()
-    return render(request, 'listado_usuarios.html', {'listado_usuarios': listado_usuarios})
+    nombre_busqueda = request.GET.get('nombre')
+    if nombre_busqueda:
+        listado_usuarios = Usuario.objects.filter(nombre__icontains =nombre_busqueda) 
+    else:    
+        listado_usuarios = Usuario.objects.all()
+    
+    form = BusquedaUsuario()
+    return render(request, 'listado_usuarios.html', {'listado_usuarios': listado_usuarios, 'form': form})
